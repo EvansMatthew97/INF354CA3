@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="INF354CA3Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="category">
+    <Key>
+      <PropertyRef Name="category_ID" />
+    </Key>
+    <Property Name="category_ID" Type="Int32" Nullable="false" />
+    <Property Name="category_name" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="products" Relationship="Self.products_category_fk" FromRole="categories" ToRole="products" />
+  </EntityType>
+  <EntityType Name="product">
+    <Key>
+      <PropertyRef Name="product_ID" />
+    </Key>
+    <Property Name="product_ID" Type="Int32" Nullable="false" />
+    <Property Name="product_name" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+    <Property Name="product_price" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="category_ID" Type="Int32" />
+    <Property Name="supplier_ID" Type="Int32" />
+    <NavigationProperty Name="category" Relationship="Self.products_category_fk" FromRole="products" ToRole="categories" />
+    <NavigationProperty Name="supplier" Relationship="Self.products_supplier_fk" FromRole="products" ToRole="suppliers" />
+  </EntityType>
+  <EntityType Name="supplier">
+    <Key>
+      <PropertyRef Name="supplier_ID" />
+    </Key>
+    <Property Name="supplier_ID" Type="Int32" Nullable="false" />
+    <Property Name="supplier_name" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+    <Property Name="spllier_address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="supplier_phone" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="supplier_email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="products" Relationship="Self.products_supplier_fk" FromRole="suppliers" ToRole="products" />
+  </EntityType>
+  <Association Name="products_category_fk">
+    <End Role="categories" Type="Self.category" Multiplicity="0..1" />
+    <End Role="products" Type="Self.product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="categories">
+        <PropertyRef Name="category_ID" />
+      </Principal>
+      <Dependent Role="products">
+        <PropertyRef Name="category_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="products_supplier_fk">
+    <End Role="suppliers" Type="Self.supplier" Multiplicity="0..1" />
+    <End Role="products" Type="Self.product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="suppliers">
+        <PropertyRef Name="supplier_ID" />
+      </Principal>
+      <Dependent Role="products">
+        <PropertyRef Name="supplier_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="INF354CA3Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="categories" EntityType="Self.category" />
+    <EntitySet Name="products" EntityType="Self.product" />
+    <EntitySet Name="suppliers" EntityType="Self.supplier" />
+    <AssociationSet Name="products_category_fk" Association="Self.products_category_fk">
+      <End Role="categories" EntitySet="categories" />
+      <End Role="products" EntitySet="products" />
+    </AssociationSet>
+    <AssociationSet Name="products_supplier_fk" Association="Self.products_supplier_fk">
+      <End Role="suppliers" EntitySet="suppliers" />
+      <End Role="products" EntitySet="products" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

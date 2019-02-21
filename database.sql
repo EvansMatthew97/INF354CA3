@@ -5,14 +5,14 @@ USE INF354CA3
 GO
 
 CREATE TABLE categories (
-	category_ID INT NOT NULL,
+	category_ID INT IDENTITY(1,1) NOT NULL,
 	category_name VARCHAR(128),
 	CONSTRAINT categories_pk PRIMARY KEY (category_ID)
 )
 GO
 
 CREATE TABLE suppliers (
-	supplier_ID INT NOT NULL,
+	supplier_ID INT IDENTITY(1,1) NOT NULL,
 	supplier_name VARCHAR(128),
 	spllier_address TEXT,
 	supplier_phone VARCHAR(10),
@@ -22,7 +22,7 @@ CREATE TABLE suppliers (
 GO
 
 CREATE TABLE products (
-	product_ID INT NOT NULL,
+	product_ID INT IDENTITY(1,1) NOT NULL,
 	product_name VARCHAR(128),
 	product_price DECIMAL,
 
@@ -37,20 +37,23 @@ GO
 
 -- insert data
 
-INSERT INTO categories (categories.category_ID, categories.category_name) VALUES (1, 'Dogs'), (2, 'Cats'), (3, 'Birds'), (4, 'Rodents')
+USE INF354CA3
+GO
 
-INSERT INTO suppliers (supplier_ID, supplier_name, supplier_email, supplier_phone) VALUES 
-	(1, 'Bob''s pets', 'bob@bobspets.com', '5551231234'),
-	(2, 'Furry Fiesta', 'furry@furryfiesta.co.za', '5555551235'),
-	(3, 'Pretoria Pets', 'info@pretoriapets.co.za', '0123456789')
+INSERT INTO categories (categories.category_name) VALUES ('Dogs'), ('Cats'), ('Birds'), ('Rodents')
 
-INSERT INTO products (product_ID, product_name, product_price, category_ID, supplier_ID) VALUES
-	(1, 'Hamster', 10.50, 4, 3),
-	(2, 'Yorkie', 3000.00, 1, 2),
-	(3, 'Labrador', 2000.0, 1, 2),
-	(4, 'Scottish Fold', 8000.00, 2, 1),
-	(5, 'Tortoise Shell', 500.00, 2, 1),
-	(6, 'Rabbit', 200.00, 4, 3),
-	(7, 'Parrot', 3000.00, 3, 3),
-	(8, 'Chicken', 50.00, 3, 3),
-	(9, 'Chihuahua', 10000.00, 1, 2)
+INSERT INTO suppliers (supplier_name, supplier_email, supplier_phone) VALUES 
+	('Bob''s pets', 'bob@bobspets.com', '5551231234'),
+	('Furry Fiesta', 'furry@furryfiesta.co.za', '5555551235'),
+	('Pretoria Pets', 'info@pretoriapets.co.za', '0123456789')
+
+INSERT INTO products (product_name, product_price, category_ID, supplier_ID) VALUES
+	('Hamster', 10.50, 4, 3),
+	('Yorkie', 3000.00, 1, 2),
+	('Labrador', 2000.0, 1, 2),
+	('Scottish Fold', 8000.00, 2, 1),
+	('Tortoise Shell', 500.00, 2, 1),
+	('Rabbit', 200.00, 4, 3),
+	('Parrot', 3000.00, 3, 3),
+	('Chicken', 50.00, 3, 3),
+	('Chihuahua', 10000.00, 1, 2)

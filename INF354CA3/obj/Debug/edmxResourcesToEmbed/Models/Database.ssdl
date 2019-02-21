@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="INF354CA3Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="categories">
+    <Key>
+      <PropertyRef Name="category_ID" />
+    </Key>
+    <Property Name="category_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="category_name" Type="varchar" MaxLength="128" />
+  </EntityType>
+  <EntityType Name="products">
+    <Key>
+      <PropertyRef Name="product_ID" />
+    </Key>
+    <Property Name="product_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="product_name" Type="varchar" MaxLength="128" />
+    <Property Name="product_price" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="category_ID" Type="int" />
+    <Property Name="supplier_ID" Type="int" />
+  </EntityType>
+  <EntityType Name="suppliers">
+    <Key>
+      <PropertyRef Name="supplier_ID" />
+    </Key>
+    <Property Name="supplier_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="supplier_name" Type="varchar" MaxLength="128" />
+    <Property Name="spllier_address" Type="text" />
+    <Property Name="supplier_phone" Type="varchar" MaxLength="10" />
+    <Property Name="supplier_email" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <Association Name="products_category_fk">
+    <End Role="categories" Type="Self.categories" Multiplicity="0..1" />
+    <End Role="products" Type="Self.products" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="categories">
+        <PropertyRef Name="category_ID" />
+      </Principal>
+      <Dependent Role="products">
+        <PropertyRef Name="category_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="products_supplier_fk">
+    <End Role="suppliers" Type="Self.suppliers" Multiplicity="0..1" />
+    <End Role="products" Type="Self.products" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="suppliers">
+        <PropertyRef Name="supplier_ID" />
+      </Principal>
+      <Dependent Role="products">
+        <PropertyRef Name="supplier_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="INF354CA3ModelStoreContainer">
+    <EntitySet Name="categories" EntityType="Self.categories" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="products" EntityType="Self.products" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="suppliers" EntityType="Self.suppliers" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="products_category_fk" Association="Self.products_category_fk">
+      <End Role="categories" EntitySet="categories" />
+      <End Role="products" EntitySet="products" />
+    </AssociationSet>
+    <AssociationSet Name="products_supplier_fk" Association="Self.products_supplier_fk">
+      <End Role="suppliers" EntitySet="suppliers" />
+      <End Role="products" EntitySet="products" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

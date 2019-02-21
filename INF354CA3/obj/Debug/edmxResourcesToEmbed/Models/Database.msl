@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="INF354CA3ModelStoreContainer" CdmEntityContainer="INF354CA3Entities">
+    <EntitySetMapping Name="categories">
+      <EntityTypeMapping TypeName="INF354CA3Model.category">
+        <MappingFragment StoreEntitySet="categories">
+          <ScalarProperty Name="category_ID" ColumnName="category_ID" />
+          <ScalarProperty Name="category_name" ColumnName="category_name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="products">
+      <EntityTypeMapping TypeName="INF354CA3Model.product">
+        <MappingFragment StoreEntitySet="products">
+          <ScalarProperty Name="product_ID" ColumnName="product_ID" />
+          <ScalarProperty Name="product_name" ColumnName="product_name" />
+          <ScalarProperty Name="product_price" ColumnName="product_price" />
+          <ScalarProperty Name="category_ID" ColumnName="category_ID" />
+          <ScalarProperty Name="supplier_ID" ColumnName="supplier_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="suppliers">
+      <EntityTypeMapping TypeName="INF354CA3Model.supplier">
+        <MappingFragment StoreEntitySet="suppliers">
+          <ScalarProperty Name="supplier_ID" ColumnName="supplier_ID" />
+          <ScalarProperty Name="supplier_name" ColumnName="supplier_name" />
+          <ScalarProperty Name="spllier_address" ColumnName="spllier_address" />
+          <ScalarProperty Name="supplier_phone" ColumnName="supplier_phone" />
+          <ScalarProperty Name="supplier_email" ColumnName="supplier_email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
